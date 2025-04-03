@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		AC073F502D9E1C5F0013AD4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC073F322D9E1C5D0013AD4B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC073F392D9E1C5D0013AD4B;
+			remoteInfo = SpringRestaurantIOSApp;
+		};
+		AC073F5A2D9E1C5F0013AD4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC073F322D9E1C5D0013AD4B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC073F392D9E1C5D0013AD4B;
+			remoteInfo = SpringRestaurantIOSApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AC073F3A2D9E1C5D0013AD4B /* SpringRestaurantIOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringRestaurantIOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC073F4F2D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpringRestaurantIOSAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC073F592D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpringRestaurantIOSAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		AC073F3C2D9E1C5D0013AD4B /* SpringRestaurantIOSApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SpringRestaurantIOSApp;
+			sourceTree = "<group>";
+		};
+		AC073F522D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SpringRestaurantIOSAppTests;
+			sourceTree = "<group>";
+		};
+		AC073F5C2D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SpringRestaurantIOSAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC073F372D9E1C5D0013AD4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC073F4C2D9E1C5F0013AD4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC073F562D9E1C5F0013AD4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC073F312D9E1C5D0013AD4B = {
+			isa = PBXGroup;
+			children = (
+				AC073F3C2D9E1C5D0013AD4B /* SpringRestaurantIOSApp */,
+				AC073F522D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests */,
+				AC073F5C2D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests */,
+				AC073F3B2D9E1C5D0013AD4B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC073F3B2D9E1C5D0013AD4B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC073F3A2D9E1C5D0013AD4B /* SpringRestaurantIOSApp.app */,
+				AC073F4F2D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests.xctest */,
+				AC073F592D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC073F392D9E1C5D0013AD4B /* SpringRestaurantIOSApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC073F632D9E1C600013AD4B /* Build configuration list for PBXNativeTarget "SpringRestaurantIOSApp" */;
+			buildPhases = (
+				AC073F362D9E1C5D0013AD4B /* Sources */,
+				AC073F372D9E1C5D0013AD4B /* Frameworks */,
+				AC073F382D9E1C5D0013AD4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AC073F3C2D9E1C5D0013AD4B /* SpringRestaurantIOSApp */,
+			);
+			name = SpringRestaurantIOSApp;
+			packageProductDependencies = (
+			);
+			productName = SpringRestaurantIOSApp;
+			productReference = AC073F3A2D9E1C5D0013AD4B /* SpringRestaurantIOSApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC073F4E2D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC073F662D9E1C600013AD4B /* Build configuration list for PBXNativeTarget "SpringRestaurantIOSAppTests" */;
+			buildPhases = (
+				AC073F4B2D9E1C5F0013AD4B /* Sources */,
+				AC073F4C2D9E1C5F0013AD4B /* Frameworks */,
+				AC073F4D2D9E1C5F0013AD4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC073F512D9E1C5F0013AD4B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AC073F522D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests */,
+			);
+			name = SpringRestaurantIOSAppTests;
+			packageProductDependencies = (
+			);
+			productName = SpringRestaurantIOSAppTests;
+			productReference = AC073F4F2D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AC073F582D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC073F692D9E1C600013AD4B /* Build configuration list for PBXNativeTarget "SpringRestaurantIOSAppUITests" */;
+			buildPhases = (
+				AC073F552D9E1C5F0013AD4B /* Sources */,
+				AC073F562D9E1C5F0013AD4B /* Frameworks */,
+				AC073F572D9E1C5F0013AD4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC073F5B2D9E1C5F0013AD4B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AC073F5C2D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests */,
+			);
+			name = SpringRestaurantIOSAppUITests;
+			packageProductDependencies = (
+			);
+			productName = SpringRestaurantIOSAppUITests;
+			productReference = AC073F592D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC073F322D9E1C5D0013AD4B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					AC073F392D9E1C5D0013AD4B = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					AC073F4E2D9E1C5F0013AD4B = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = AC073F392D9E1C5D0013AD4B;
+					};
+					AC073F582D9E1C5F0013AD4B = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = AC073F392D9E1C5D0013AD4B;
+					};
+				};
+			};
+			buildConfigurationList = AC073F352D9E1C5D0013AD4B /* Build configuration list for PBXProject "SpringRestaurantIOSApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC073F312D9E1C5D0013AD4B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = AC073F3B2D9E1C5D0013AD4B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC073F392D9E1C5D0013AD4B /* SpringRestaurantIOSApp */,
+				AC073F4E2D9E1C5F0013AD4B /* SpringRestaurantIOSAppTests */,
+				AC073F582D9E1C5F0013AD4B /* SpringRestaurantIOSAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC073F382D9E1C5D0013AD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC073F4D2D9E1C5F0013AD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC073F572D9E1C5F0013AD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC073F362D9E1C5D0013AD4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC073F4B2D9E1C5F0013AD4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC073F552D9E1C5F0013AD4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC073F512D9E1C5F0013AD4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC073F392D9E1C5D0013AD4B /* SpringRestaurantIOSApp */;
+			targetProxy = AC073F502D9E1C5F0013AD4B /* PBXContainerItemProxy */;
+		};
+		AC073F5B2D9E1C5F0013AD4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC073F392D9E1C5D0013AD4B /* SpringRestaurantIOSApp */;
+			targetProxy = AC073F5A2D9E1C5F0013AD4B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AC073F612D9E1C600013AD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC073F622D9E1C600013AD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC073F642D9E1C600013AD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SpringRestaurantIOSApp/Preview Content\"";
+				DEVELOPMENT_TEAM = WQDA533NZ5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.springrestaurant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC073F652D9E1C600013AD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SpringRestaurantIOSApp/Preview Content\"";
+				DEVELOPMENT_TEAM = WQDA533NZ5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.springrestaurant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AC073F672D9E1C600013AD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQDA533NZ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.springrestaurant.SpringRestaurantIOSAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpringRestaurantIOSApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpringRestaurantIOSApp";
+			};
+			name = Debug;
+		};
+		AC073F682D9E1C600013AD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQDA533NZ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.springrestaurant.SpringRestaurantIOSAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpringRestaurantIOSApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpringRestaurantIOSApp";
+			};
+			name = Release;
+		};
+		AC073F6A2D9E1C600013AD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQDA533NZ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.springrestaurant.SpringRestaurantIOSAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SpringRestaurantIOSApp;
+			};
+			name = Debug;
+		};
+		AC073F6B2D9E1C600013AD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQDA533NZ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.home.springrestaurant.SpringRestaurantIOSAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SpringRestaurantIOSApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC073F352D9E1C5D0013AD4B /* Build configuration list for PBXProject "SpringRestaurantIOSApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC073F612D9E1C600013AD4B /* Debug */,
+				AC073F622D9E1C600013AD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC073F632D9E1C600013AD4B /* Build configuration list for PBXNativeTarget "SpringRestaurantIOSApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC073F642D9E1C600013AD4B /* Debug */,
+				AC073F652D9E1C600013AD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC073F662D9E1C600013AD4B /* Build configuration list for PBXNativeTarget "SpringRestaurantIOSAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC073F672D9E1C600013AD4B /* Debug */,
+				AC073F682D9E1C600013AD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC073F692D9E1C600013AD4B /* Build configuration list for PBXNativeTarget "SpringRestaurantIOSAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC073F6A2D9E1C600013AD4B /* Debug */,
+				AC073F6B2D9E1C600013AD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC073F322D9E1C5D0013AD4B /* Project object */;
+}
