@@ -32,7 +32,14 @@ struct NetworkManager: NetworkManagerProtocol {
 
 private extension HTTPRequestProtocol {
     func urlRequest() throws -> URLRequest {
-        guard let url = URL(string: baseURL + endPoint.restEndPoint),
+        var path = endPoint.restEndPoint
+        if let pathParameters = endPoint.pathParameters {
+            for (key, value) in pathParameters {
+                path = path.replacingOccurrences(of: "{\(key)}", with: "\(value)")
+            }
+        }
+      
+        guard let url = URL(string: baseURL + path),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             throw InvalidRequestError.invalidURL
         }
@@ -123,4 +130,5 @@ public enum InvalidRequestError: Error {
 
 protocol HTTPEndPointProtocol {
     var restEndPoint: String { get }
+    var pathParameters: [String: String]? { get }
 }

@@ -13,10 +13,12 @@ enum RestAPIError: Error {
 
 protocol RestApiProtocol {
     func login(username: String, password: String) async throws -> String?
+    func getRestaurantById(id: Int64, token: String) async throws -> RestaurantData
 }
 
 enum RestEndPoint: String {
     case login = "/api/auth/login"
+    case restaurants = "/api/restaurants/{id}"
 }
 
 final class RestApiClient: RestApiProtocol {
@@ -35,6 +37,13 @@ final class RestApiClient: RestApiProtocol {
         let loginResponse: LoginResponse = try parseResult(response)
         return loginResponse.token
     }
+    
+    func getRestaurantById(id: Int64, token: String) async throws -> RestaurantData {
+        let restaurantRequest = RestaurantRequest(baseURL: baseUrl, headers: authHeader(token: token), restaurantId: id)
+        let response = try await networkManager.request(request: restaurantRequest)
+        let restaurantResponse: RestaurantResponse = try parseResult(response)
+        return restaurantResponse.data
+    }
 }
 
 fileprivate extension RestApiClient {
@@ -45,5 +54,9 @@ fileprivate extension RestApiClient {
         } catch {
             throw RestAPIError.parseError(error)
         }
+    }
+    
+    func authHeader(token: String) -> [String: String] {
+        return ["Authorization": "Bearer \(token)"]
     }
 }

@@ -22,5 +22,6 @@ struct LoginRequest: HTTPRequestProtocol {
 }
 
 struct LoginEndPoint: HTTPEndPointProtocol {
-    var restEndPoint: String { RestEndPoint.login.rawValue }
+    let restEndPoint: String = RestEndPoint.login.rawValue
+    let pathParameters: [String : String]? = nil
 }
