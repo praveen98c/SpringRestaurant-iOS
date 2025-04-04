@@ -32,34 +32,14 @@ struct NetworkManager: NetworkManagerProtocol {
 
 private extension HTTPRequestProtocol {
     func urlRequest() throws -> URLRequest {
-        var path = endPoint.restEndPoint
-        if let pathParameters = endPoint.pathParameters {
-            for (key, value) in pathParameters {
-                path = path.replacingOccurrences(of: "{\(key)}", with: "\(value)")
-            }
-        }
-      
+        let path = endPoint.resolvedPath()
         guard let url = URL(string: baseURL + path),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             throw InvalidRequestError.invalidURL
         }
         
-        if let queryParameters = queryParameters {
-            var queryItems: [URLQueryItem] = []
-            for (key, value) in queryParameters {
-                for v in value {
-                    queryItems.append(URLQueryItem(name: key, value: "\(v)"))
-                }
-            }
-            
+        if let queryItems = queryItems() {
             components.queryItems = queryItems
-        }
-        
-        var headers: [String: String]? = headers
-        
-        if let bodyType = bodyType {
-            headers = headers ?? [:]
-            headers?[bodyType.header.key] = bodyType.header.value
         }
         
         guard let finalUrl = components.url else {
@@ -68,14 +48,8 @@ private extension HTTPRequestProtocol {
         
         var req = URLRequest(url: finalUrl)
         req.httpMethod = method.rawValue
-        
-        if let headers = headers {
-            req.allHTTPHeaderFields = headers
-        }
-        
-        if let body = bodyType?.body {
-            req.httpBody = body
-        }
+        req.allHTTPHeaderFields = combinedHeaders()
+        req.httpBody = bodyType?.body
         return req
     }
 }
@@ -84,10 +58,10 @@ enum BodyType: HTTPBodyTypeProtocol {
     
     case json([String: Any])
     
-    var header: (key: String, value: String) {
+    var header: [String: String] {
         switch self {
         case .json:
-            return (key: "Content-Type", value: "application/json")
+            return ["Content-Type": "application/json"]
         }
     }
     
@@ -109,7 +83,7 @@ protocol HTTPRequestProtocol {
 }
 
 protocol HTTPBodyTypeProtocol {
-    var header: (key: String, value: String) { get }
+    var header: [String: String] { get }
     var body: Data? { get }
 }
 
@@ -131,4 +105,40 @@ public enum InvalidRequestError: Error {
 protocol HTTPEndPointProtocol {
     var restEndPoint: String { get }
     var pathParameters: [String: String]? { get }
+    func resolvedPath() -> String
+}
+
+extension HTTPEndPointProtocol {
+    
+    func resolvedPath() -> String {
+        guard let pathParameters = pathParameters else {
+            return restEndPoint
+        }
+        
+        var resolved = restEndPoint
+        for (key, value) in pathParameters {
+            resolved = resolved.replacingOccurrences(of: "{\(key)}", with: value.description)
+        }
+        
+        return resolved
+    }
+}
+
+extension HTTPRequestProtocol {
+    
+    func queryItems() -> [URLQueryItem]? {
+        queryParameters?.flatMap { key, values in
+            values.map { URLQueryItem(name: key, value: "\($0)") }
+        }
+    }
+    
+    func combinedHeaders() -> [String: String] {
+        var headers: [String: String] = headers ?? [:]
+        
+        if let header = bodyType?.header {
+            headers.merge(header) { (_, new) in new }
+        }
+        
+        return headers
+    }
 }
