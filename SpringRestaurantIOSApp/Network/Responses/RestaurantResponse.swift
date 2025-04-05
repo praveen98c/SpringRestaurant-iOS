@@ -16,4 +16,5 @@ struct RestaurantData: Codable {
 struct RestaurantResponse : Codable {
     let data: RestaurantData
     let message: String
+    let code: Int
 }

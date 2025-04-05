@@ -7,26 +7,36 @@
 
 import Foundation
 
+struct NetworkErrorData: Error {
+    let error: Error
+    let data: Data?
+}
+
 protocol NetworkManagerProtocol {
     func request(
         request: HTTPRequestProtocol
-    ) async throws -> Data
+    ) async -> Result<Data, NetworkErrorData>
 }
 
 struct NetworkManager: NetworkManagerProtocol {
-    func request(request: HTTPRequestProtocol) async throws -> Data {
-        let (data, response) = try await URLSession.shared.data(for: request.urlRequest())
+    
+    func request(request: HTTPRequestProtocol) async -> Result<Data, NetworkErrorData> {
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request.urlRequest())
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                return .failure(NetworkErrorData(error: NetworkError.noResponse, data: nil))
+            }
+            
+            let statusCode = httpResponse.statusCode
+            if statusCode < 200 || statusCode >= 300 {
+                return .failure(NetworkErrorData(error: NetworkError.httpError(statusCode), data: data))
+            }
         
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.noResponse
+            return .success(data)
+        } catch {
+            return .failure(NetworkErrorData(error: error, data: nil))
         }
-        
-        let statusCode = httpResponse.statusCode
-        if statusCode < 200 || statusCode >= 300 {
-            throw NetworkError.httpError(statusCode)
-        }
-        
-        return data
     }
 }
 

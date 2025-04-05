@@ -7,17 +7,15 @@
 
 import Foundation
 
-enum RestAPIError: Error {
-    case parseError(Error)
-}
-
 protocol RestApiProtocol {
     func login(username: String, password: String) async throws -> String?
+    func register(username: String, password: String, name: String) async throws
     func getRestaurantById(id: Int64, token: String) async throws -> RestaurantData
 }
 
 enum RestEndPoint: String {
     case login = "/api/auth/login"
+    case register = "/api/auth/register"
     case restaurants = "/api/restaurants/{id}"
 }
 
@@ -33,14 +31,20 @@ final class RestApiClient: RestApiProtocol {
     
     func login(username: String, password: String) async throws -> String? {
         let loginRequest = LoginRequest(baseURL: baseUrl, username: username, password: password)
-        let response = try await networkManager.request(request: loginRequest)
+        let response = await networkManager.request(request: loginRequest)
         let loginResponse: LoginResponse = try parseResult(response)
         return loginResponse.token
     }
     
+    func register(username: String, password: String, name: String) async throws {
+        let registerRequest = RegisterRequest(baseURL: baseUrl, username: username, password: password, name: name)
+        let response = await networkManager.request(request: registerRequest)
+        let _: ApiResponse = try parseResult(response)
+    }
+    
     func getRestaurantById(id: Int64, token: String) async throws -> RestaurantData {
         let restaurantRequest = RestaurantRequest(baseURL: baseUrl, headers: authHeader(token: token), restaurantId: id)
-        let response = try await networkManager.request(request: restaurantRequest)
+        let response = await networkManager.request(request: restaurantRequest)
         let restaurantResponse: RestaurantResponse = try parseResult(response)
         return restaurantResponse.data
     }
@@ -48,15 +52,32 @@ final class RestApiClient: RestApiProtocol {
 
 fileprivate extension RestApiClient {
     
-    func parseResult<T: Decodable>(_ data: Data) throws -> T {
+    func parseResult<T: Decodable>(_ result: Result<Data, NetworkErrorData>) throws -> T {
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            switch result {
+            case .success(let data):
+                return try JSONDecoder().decode(T.self, from: data)
+            case .failure(let networkError):
+                var apiResponse: ApiResponse? = nil
+                if let data = networkError.data {
+                    apiResponse = try JSONDecoder().decode(ApiResponse.self, from: data)
+                }
+                
+                let message = apiResponse?.message ?? "Unknown error"
+                let code = apiResponse?.code ?? -999
+                throw RestAPIError.apiError(message, code)
+            }
         } catch {
-            throw RestAPIError.parseError(error)
+            throw error
         }
     }
     
     func authHeader(token: String) -> [String: String] {
         return ["Authorization": "Bearer \(token)"]
     }
+}
+
+enum RestAPIError: Error {
+    case apiError(String, Int)
+    case parseError(Error)
 }

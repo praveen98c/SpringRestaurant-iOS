@@ -16,6 +16,7 @@ enum LoginViewState {
 
 @MainActor
 class LoginViewModel: ObservableObject {
+    
     @Published var viewState: LoginViewState = .enterCredentials
     @Published var username: String = ""
     @Published var password: String = ""

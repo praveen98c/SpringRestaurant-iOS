@@ -14,6 +14,7 @@ struct LoginData: Codable {
 struct LoginResponse : Codable {
     let data: LoginData
     let message: String
+    let code: Int
     
     var token: String? {
         return data.token

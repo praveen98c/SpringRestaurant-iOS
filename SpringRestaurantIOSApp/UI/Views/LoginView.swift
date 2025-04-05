@@ -1,14 +1,14 @@
 //
-//  LoginScreen.swift
+//  LoginView.swift
 //  SpringRestaurantIOSApp
 //
-//  Created by Praveen on 2025-04-02.
+//  Created by Praveen on 2025-04-04.
 //
 
 import Foundation
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginView: View {
     
     @StateObject var viewModel: LoginViewModel
     
@@ -33,7 +33,7 @@ struct LoginScreen: View {
     }
 }
 
-private extension LoginScreen {
+private extension LoginView {
     
     var loginCredentials: some View {
         VStack {
@@ -73,3 +73,5 @@ private extension LoginScreen {
         .padding()
     }
 }
+
+
