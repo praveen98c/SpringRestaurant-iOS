@@ -54,25 +54,14 @@ private extension RegisterView {
                 .padding(.top, 50)
             
             TextField("Enter your username", text: $viewModel.username)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                .padding(.horizontal, 30)
+                .modifier(LoginViewButtonModifier())
             
             SecureField("Enter your password", text: $viewModel.password)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                .padding(.horizontal, 30)
-                .padding(.top, 20)
+                .modifier(LoginViewButtonModifier())
             
             
-            SecureField("Enter your name", text: $viewModel.name)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                .padding(.horizontal, 30)
-                .padding(.top, 20)
+            TextField("Enter your name", text: $viewModel.name)
+                .modifier(LoginViewButtonModifier())
             
             Button(action: {
                 Task {
