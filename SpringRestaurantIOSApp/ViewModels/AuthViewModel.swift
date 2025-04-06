@@ -14,7 +14,7 @@ enum AuthState {
 }
 
 protocol AuthManagingProtocol {
-    func loginSuccess(token: String)
+    func loginSuccess()
     func logout()
 }
 
@@ -43,8 +43,7 @@ class AuthViewModel: ObservableObject, AuthManagingProtocol {
         }
     }
     
-    func loginSuccess(token: String) {
-        keyChainValues.authToken = token
+    func loginSuccess() {
         authState = .authenticated
     }
     

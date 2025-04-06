@@ -7,14 +7,8 @@
 
 import Foundation
 
-struct RestaurantData: Codable {
+struct RestaurantDTO: Codable {
     let id: Int64
     let name: String
     let location: String
-}
-
-struct RestaurantResponse : Codable {
-    let data: RestaurantData
-    let message: String
-    let code: Int
 }

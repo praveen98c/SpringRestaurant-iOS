@@ -40,24 +40,24 @@ class RegisterViewModel: ObservableObject {
         }
         
         viewState = .loading
-        do {
-            try await restApiClient.register(username: username, password: password, name: name)
+        let result = await restApiClient.register(username: username, password: password, name: name)
+        switch result {
+        case .success(_):
             viewState = .success
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 self?.dismissAction?()
             }
-        } catch let error as RestAPIError {
-            let message: String
+        case .failure(let error):
             switch error {
-            case .apiError(let msg, _):
-                message = msg
-            case .parseError(_):
-                message = "internal error"
+            case .apiError(_, let code):
+                if let errorCode = RestApiErrorCodes(rawValue: code) {
+                    viewState = .failure(errorCode.localizedMessage)
+                } else {
+                    fatalError("Unhandled error code: \(code)")
+                }
+            case .parseError:
+                fatalError("Unhandled parse error")
             }
-            
-            viewState = .failure(message)
-        } catch {
-            
         }
     }
 }

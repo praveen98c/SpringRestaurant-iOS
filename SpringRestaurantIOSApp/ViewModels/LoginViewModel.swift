@@ -36,15 +36,21 @@ class LoginViewModel: ObservableObject {
         }
         
         viewState = .loading
-        do {
-            guard let token = try await restApiClient.login(username: username, password: password) else {
-                viewState = .failure("Invalid Credentials")
-                return
+        let result = await restApiClient.login(username: username, password: password)
+        switch result {
+        case .success(_):
+            authProtocol.loginSuccess()
+        case .failure(let error):
+            switch error {
+            case .apiError(_, let code):
+                if let errorCode = RestApiErrorCodes(rawValue: code) {
+                    viewState = .failure(errorCode.localizedMessage)
+                } else {
+                    fatalError("Unhandled error code: \(code)")
+                }
+            case .parseError:
+                fatalError("Unhandled parse error")
             }
-            
-            authProtocol.loginSuccess(token: token)
-        } catch {
-            viewState = .failure("Login Failed")
         }
     }
 }

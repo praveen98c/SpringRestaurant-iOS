@@ -13,6 +13,6 @@ struct AppContext {
     let jwtHelper: JWTHelperProtocol = JWTHelper()
     
     init() {
-        restApiClient = RestApiClient(networkManager: NetworkManager(), baseUrl: "http://127.0.0.1:8081")
+        restApiClient = RestApiClient(networkManager: NetworkManager(), baseUrl: "http://127.0.0.1:8081", keyChainValues: keychainValues)
     }
 }
