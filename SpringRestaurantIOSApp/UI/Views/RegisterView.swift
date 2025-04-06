@@ -21,20 +21,21 @@ struct RegisterView: View {
     }
     
     var body: some View {
-        Group {
+        VStack {
+            enterInfo
             switch viewModel.viewState {
-            case .enterInfo:
-                enterInfo
+            case .none:
+                EmptyView()
             case .failure(let error):
-                enterInfo
                 Text(error)
                     .foregroundColor(.red)
-                    .padding(.top, 10)
-            case .loading:
+                    .padding(.bottom, 5)
+            case .networkRequestInProgress:
                 ProgressView()
+                    .padding(.bottom, 5)
             case .success:
-                enterInfo
                 Text("Registration successful! Returning to login...")
+                    .padding(.bottom, 5)
             }
         }
         .onAppear {
@@ -54,14 +55,14 @@ private extension RegisterView {
                 .padding(.top, 50)
             
             TextField("Enter your username", text: $viewModel.username)
-                .modifier(LoginViewButtonModifier())
+                .modifier(LoginTextFieldModifier())
             
             SecureField("Enter your password", text: $viewModel.password)
-                .modifier(LoginViewButtonModifier())
+                .modifier(LoginTextFieldModifier())
             
             
             TextField("Enter your name", text: $viewModel.name)
-                .modifier(LoginViewButtonModifier())
+                .modifier(LoginTextFieldModifier())
             
             Button(action: {
                 Task {
@@ -69,14 +70,9 @@ private extension RegisterView {
                 }
             }) {
                 Text("Register")
-                    .fontWeight(.bold)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.top, 20)
+                    .modifier(LoginViewButtonModifier(isDisabled: viewModel.viewState.isNetworkRequestInProgress))
             }
+            .disabled(viewModel.viewState.isNetworkRequestInProgress)
             .padding(.horizontal, 30)
         }
         .padding()

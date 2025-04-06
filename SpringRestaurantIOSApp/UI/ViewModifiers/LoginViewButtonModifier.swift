@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct LoginViewButtonModifier: ViewModifier {
+    
+    var isDisabled: Bool
+    
     func body(content: Content) -> some View {
         content
+            .fontWeight(.bold)
             .padding()
-            .background(Color.gray.opacity(0.1))
+            .frame(maxWidth: .infinity)
+            .background(isDisabled ? Color.gray: Color.blue)
+            .foregroundColor(.white)
             .cornerRadius(10)
-            .padding(.horizontal, 30)
+            .padding(.top, 20)
     }
 }

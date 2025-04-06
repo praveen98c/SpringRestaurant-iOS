@@ -8,11 +8,19 @@
 import Foundation
 import SwiftUI
 
-enum RegisterViewState {
-    case enterInfo
+enum RegisterViewFeedbackState {
+    case none
     case failure(String)
-    case loading
+    case networkRequestInProgress
     case success
+    
+    var isNetworkRequestInProgress: Bool {
+        if case .networkRequestInProgress = self {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 @MainActor
@@ -20,7 +28,7 @@ class RegisterViewModel: ObservableObject {
     
     var dismissAction: (() -> Void)?
     
-    @Published var viewState: RegisterViewState = .enterInfo
+    @Published var viewState: RegisterViewFeedbackState = .none
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var name: String = ""
@@ -39,7 +47,7 @@ class RegisterViewModel: ObservableObject {
             return
         }
         
-        viewState = .loading
+        viewState = .networkRequestInProgress
         let result = await restApiClient.register(username: username, password: password, name: name)
         switch result {
         case .success(_):

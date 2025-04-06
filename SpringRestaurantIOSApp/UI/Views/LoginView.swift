@@ -20,15 +20,19 @@ struct LoginView: View {
     }
     
     var body: some View {
-        switch viewModel.viewState {
-        case .enterCredentials:
+        VStack {
             loginCredentials
-        case .failure(let error):
-            Text(error)
-                .foregroundColor(.red)
-                .padding(.top, 10)
-        case .loading:
-            ProgressView()
+            switch viewModel.viewState {
+            case .none:
+                EmptyView()
+            case .failure(let errorMessage):
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(.bottom, 5)
+            case .networkRequestInProgress:
+                ProgressView()
+                    .padding(.bottom, 5)
+            }
         }
     }
 }
@@ -42,10 +46,10 @@ private extension LoginView {
                 .padding(.top, 50)
             
             TextField("Enter your username", text: $viewModel.username)
-                .modifier(LoginViewButtonModifier())
+                .modifier(LoginTextFieldModifier())
             
             SecureField("Enter your password", text: $viewModel.password)
-                .modifier(LoginViewButtonModifier())
+                .modifier(LoginTextFieldModifier())
             
             Button(action: {
                 Task {
@@ -53,14 +57,9 @@ private extension LoginView {
                 }
             }) {
                 Text("Login")
-                    .fontWeight(.bold)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.top, 20)
+                    .modifier(LoginViewButtonModifier(isDisabled: viewModel.viewState.isNetworkRequestInProgress))
             }
+            .disabled(viewModel.viewState.isNetworkRequestInProgress)
             .padding(.horizontal, 30)
         }
         .padding()

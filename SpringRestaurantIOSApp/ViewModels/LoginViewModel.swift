@@ -8,19 +8,27 @@
 import Foundation
 import Combine
 
-enum LoginViewState {
-    case enterCredentials
+enum LoginViewFeedbackState {
+    case none
     case failure(String)
-    case loading
+    case networkRequestInProgress
+    
+    var isNetworkRequestInProgress: Bool {
+        if case .networkRequestInProgress = self {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 @MainActor
 class LoginViewModel: ObservableObject {
     
-    @Published var viewState: LoginViewState = .enterCredentials
+    @Published var viewState: LoginViewFeedbackState = .none
     @Published var username: String = ""
     @Published var password: String = ""
-    
+
     private let restApiClient: RestApiProtocol
     private let authProtocol: AuthManagingProtocol
     
@@ -35,7 +43,7 @@ class LoginViewModel: ObservableObject {
             return
         }
         
-        viewState = .loading
+        viewState = .networkRequestInProgress
         let result = await restApiClient.login(username: username, password: password)
         switch result {
         case .success(_):
