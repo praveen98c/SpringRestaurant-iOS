@@ -8,16 +8,10 @@
 import Foundation
 import SwiftUI
 
-enum LoginViewType {
-    case login
-    case register
-}
-
 struct LoginScreen: View {
     
     let appContext: AppContext
     let authProtocol: AuthManagingProtocol
-    @State var viewType: LoginViewType = .login
     
     init(appContext: AppContext, authProtocol: AuthManagingProtocol) {
         self.appContext = appContext
@@ -25,16 +19,14 @@ struct LoginScreen: View {
     }
     
     var body: some View {
-        VStack {
-            switch viewType {
-            case .login:
+        NavigationStack {
+            VStack {
                 LoginView(appContext: appContext, authProtocol: authProtocol)
-            case .register:
-                RegisterView(appContext: appContext, authProtocol: authProtocol)
-            }
-         
-            Button(viewType == .login ? "Register ?" : "Login ?") {
-                viewType = viewType == .login ? .register : .login
+                NavigationLink(
+                    destination: RegisterView(appContext: appContext, authProtocol: authProtocol)
+                ) {
+                    Text("Register")
+                }
             }
         }
     }

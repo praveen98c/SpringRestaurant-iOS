@@ -18,6 +18,8 @@ enum RegisterViewState {
 @MainActor
 class RegisterViewModel: ObservableObject {
     
+    var dismissAction: (() -> Void)?
+    
     @Published var viewState: RegisterViewState = .enterInfo
     @Published var username: String = ""
     @Published var password: String = ""
@@ -41,6 +43,9 @@ class RegisterViewModel: ObservableObject {
         do {
             try await restApiClient.register(username: username, password: password, name: name)
             viewState = .success
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.dismissAction?()
+            }
         } catch let error as RestAPIError {
             let message: String
             switch error {

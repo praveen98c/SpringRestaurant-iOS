@@ -11,6 +11,7 @@ import SwiftUI
 struct RegisterView: View {
     
     @StateObject var viewModel: RegisterViewModel
+    @Environment(\.dismiss) private var dismiss
     
     let appContext: AppContext
     
@@ -18,19 +19,28 @@ struct RegisterView: View {
         self.appContext = appContext
         _viewModel = .init(wrappedValue: RegisterViewModel(restApiClient: appContext.restApiClient, authProtocol: authProtocol))
     }
+    
     var body: some View {
-        switch viewModel.viewState {
-        case .enterInfo:
-            enterInfo
-        case .failure(let error):
-            enterInfo
-            Text(error)
-                .foregroundColor(.red)
-                .padding(.top, 10)
-        case .loading:
-            ProgressView()
-        case .success:
-            Text("Success")
+        Group {
+            switch viewModel.viewState {
+            case .enterInfo:
+                enterInfo
+            case .failure(let error):
+                enterInfo
+                Text(error)
+                    .foregroundColor(.red)
+                    .padding(.top, 10)
+            case .loading:
+                ProgressView()
+            case .success:
+                enterInfo
+                Text("Registration successful! Returning to login...")
+            }
+        }
+        .onAppear {
+            viewModel.dismissAction = {
+                dismiss()
+            }
         }
     }
 }
