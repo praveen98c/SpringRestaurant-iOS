@@ -12,17 +12,20 @@ struct RestaurantRequest: HTTPRequestProtocol {
     let endPoint: HTTPEndPointProtocol
     let method: HTTPMethod = .GET
     let headers: [String: String]?
-    let queryParameters: [String : [Any]]? = nil
+    let queryParameters: [String : [Any]]?
     let bodyType: BodyType? = nil
     
     init(baseURL: String, headers: [String: String], restaurantId: Int64) {
         self.baseURL = baseURL
         self.headers = headers
-        endPoint = RestaurantEndPoint(pathParameters: ["id": String(restaurantId)])
+        queryParameters = nil
+        endPoint = HTTPEndPoint(restEndPoint: RestEndPoint.restaurantById.rawValue, pathParameters: ["id": String(restaurantId)])
     }
-}
-
-struct RestaurantEndPoint: HTTPEndPointProtocol {
-    let restEndPoint: String = RestEndPoint.restaurants.rawValue
-    let pathParameters: [String : String]?
+    
+    init(baseURL: String, headers: [String: String], queryParameters: [String : [Any]]?) {
+        self.baseURL = baseURL
+        self.headers = headers
+        self.queryParameters = queryParameters
+        endPoint = HTTPEndPoint(restEndPoint: RestEndPoint.restaurants.rawValue, pathParameters: nil)
+    }
 }

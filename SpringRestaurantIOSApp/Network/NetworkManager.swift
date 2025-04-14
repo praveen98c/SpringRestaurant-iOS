@@ -16,13 +16,29 @@ protocol NetworkManagerProtocol {
     func request(
         request: HTTPRequestProtocol
     ) async -> Result<Data, NetworkErrorData>
+    
+    func request(url: URL) async -> Result<Data, NetworkErrorData>
 }
 
 struct NetworkManager: NetworkManagerProtocol {
     
     func request(request: HTTPRequestProtocol) async -> Result<Data, NetworkErrorData> {
         do {
-            let (data, response) = try await URLSession.shared.data(for: request.urlRequest())
+            return await self.request(request: try request.urlRequest())
+        }
+        catch {
+            return .failure(NetworkErrorData(error: error, data: nil))
+        }
+    }
+    
+    func request(url: URL) async -> Result<Data, NetworkErrorData> {
+        let urlRequest = URLRequest(url: url)
+        return await request(request: urlRequest)
+    }
+    
+    private func request(request: URLRequest) async -> Result<Data, NetworkErrorData> {
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 return .failure(NetworkErrorData(error: NetworkError.noResponse, data: nil))
@@ -32,7 +48,7 @@ struct NetworkManager: NetworkManagerProtocol {
             if statusCode < 200 || statusCode >= 300 {
                 return .failure(NetworkErrorData(error: NetworkError.httpError(statusCode), data: data))
             }
-        
+            
             return .success(data)
         } catch {
             return .failure(NetworkErrorData(error: error, data: nil))
@@ -116,6 +132,11 @@ protocol HTTPEndPointProtocol {
     var restEndPoint: String { get }
     var pathParameters: [String: String]? { get }
     func resolvedPath() -> String
+}
+
+struct HTTPEndPoint: HTTPEndPointProtocol {
+    let restEndPoint: String
+    let pathParameters: [String : String]?
 }
 
 extension HTTPEndPointProtocol {

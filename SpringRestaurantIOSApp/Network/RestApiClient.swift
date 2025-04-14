@@ -11,19 +11,21 @@ protocol RestApiProtocol {
     func login(username: String, password: String) async -> Result<LoginDTO, RestAPIError>
     func register(username: String, password: String, name: String) async -> Result<Void, RestAPIError>
     func getRestaurantById(id: Int64) async -> Result<RestaurantDTO, RestAPIError>
+    func getRestaurants(page: Int, size: Int) async -> Result<PageDTO<RestaurantDTO>, RestAPIError>
 }
 
 enum RestEndPoint: String {
     case login = "/api/auth/login"
     case register = "/api/auth/register"
-    case restaurants = "/api/restaurants/{id}"
+    case restaurantById = "/api/restaurants/{id}"
+    case restaurants = "/api/restaurants"
 }
 
 final class RestApiClient: RestApiProtocol {
     
-    let networkManager: NetworkManagerProtocol
-    let baseUrl: String
-    var keyChainValues: KeyChainValuesProtocol
+    private let networkManager: NetworkManagerProtocol
+    private let baseUrl: String
+    private var keyChainValues: KeyChainValuesProtocol
     
     init(networkManager: NetworkManagerProtocol, baseUrl: String, keyChainValues: KeyChainValuesProtocol) {
         self.networkManager = networkManager
@@ -56,6 +58,13 @@ final class RestApiClient: RestApiProtocol {
         let response = await networkManager.request(request: restaurantRequest)
         return parseResult(response)
     }
+    
+    func getRestaurants(page: Int, size: Int) async -> Result<PageDTO<RestaurantDTO>, RestAPIError> {
+        guard let token = keyChainValues.authToken else { fatalError() }
+        let restaurantRequest = RestaurantRequest(baseURL: baseUrl, headers: authHeader(token: token), queryParameters: ["page": [page], "size": [size]])
+        let response = await networkManager.request(request: restaurantRequest)
+        return parseResult(response)
+    }
 }
 
 fileprivate extension RestApiClient {
@@ -75,7 +84,7 @@ fileprivate extension RestApiClient {
         }
     }
     
-    func parseResult<T: Decodable>(_ result: Result<Data, NetworkErrorData>) -> Result<T, RestAPIError>  {
+    func parseResult<T: Decodable>(_ result: Result<Data, NetworkErrorData>) -> Result<T, RestAPIError> {
         do {
             switch result {
             case .success(let data):

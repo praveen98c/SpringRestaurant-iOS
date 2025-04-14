@@ -22,7 +22,7 @@ struct ContentView: View {
         NavigationStack {
             switch authViewModel.authState {
             case .authenticated:
-                HomeScreen(authManaging: authViewModel)
+                HomeScreen(appContext: appContext, authManaging: authViewModel)
             case .notAuthenticated:
                 LoginScreen(appContext: appContext, authProtocol: authViewModel)
             case .checking:

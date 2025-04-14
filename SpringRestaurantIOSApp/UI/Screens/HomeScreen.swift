@@ -11,17 +11,28 @@ import SwiftUI
 struct HomeScreen: View {
     
     var authManaging: AuthManagingProtocol
+    let appContext: AppContext
+    @StateObject var viewModel = HomeViewModel()
     
-    init(authManaging: AuthManagingProtocol) {
+    init(appContext: AppContext, authManaging: AuthManagingProtocol) {
         self.authManaging = authManaging
+        self.appContext = appContext
     }
     
     var body: some View {
-        Text("Hello, World!")
-        Button("Logout", action: {
-            Task {
-                authManaging.logout()
+        NavigationStack(path: $viewModel.navigationPath) {
+            VStack(spacing: 0) {
+                FeaturedRestaurantsView(appContext: appContext, navigationPath: $viewModel.navigationPath)
+                RestaurantsView(appContext: appContext, navigationPath: $viewModel.navigationPath)
+                Button("Logout", action: {
+                    Task {
+                        authManaging.logout()
+                    }
+                })
             }
-        })
+        }
+        .navigationDestination(for: RestaurantModel.self) { restaurant in
+            RestaurantDetailView(restaurant: restaurant)
+        }
     }
 }
