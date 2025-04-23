@@ -76,10 +76,8 @@ fileprivate extension RestApiClient {
         case .failure(let networkError):
             do {
                 try handleFailure(networkError: networkError)
-            } catch let error as RestAPIError {
-                return .failure(error)
             } catch {
-                return .failure(.parseError(error))
+                return .failure(error)
             }
         }
     }
@@ -88,26 +86,35 @@ fileprivate extension RestApiClient {
         do {
             switch result {
             case .success(let data):
-                let decoded =  try JSONDecoder().decode(T.self, from: data)
+                let decoded: T = try parse(data: data)
                 return .success(decoded)
             case .failure(let networkError):
                 try handleFailure(networkError: networkError)
             }
-        } catch let error as RestAPIError {
-            return .failure(error)
         } catch {
-            return .failure(.parseError(error))
+            return .failure(error)
         }
     }
     
-    private func handleFailure(networkError: NetworkErrorData) throws -> Never {
-        let apiResponse: ApiResponse? = try {
-            guard let data = networkError.data else { return nil }
-            return try JSONDecoder().decode(ApiResponse.self, from: data)
-        }()
+    private func parse<T: Decodable>(data: Data) throws(RestAPIError) -> T {
+        do {
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            throw .parseError(error)
+        }
+    }
+    
+    private func handleFailure(networkError: NetworkErrorData) throws(RestAPIError) -> Never {
+        guard
+            let data = networkError.data,
+            !data.isEmpty
+        else {
+            throw .networkError(networkError.error)
+        }
         
-        let message = apiResponse?.message ?? "Unknown error"
-        let code = apiResponse?.code ?? -999
+        let apiResponse: ApiResponse = try parse(data: data)
+        let message = apiResponse.message
+        let code = apiResponse.code
         throw RestAPIError.apiError(message, code)
     }
     
@@ -118,5 +125,6 @@ fileprivate extension RestApiClient {
 
 enum RestAPIError: Error {
     case apiError(String, Int)
+    case networkError(NetworkError)
     case parseError(Error)
 }

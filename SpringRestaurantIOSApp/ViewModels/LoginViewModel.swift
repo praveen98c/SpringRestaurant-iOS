@@ -56,8 +56,10 @@ class LoginViewModel: ObservableObject {
                 } else {
                     fatalError("Unhandled error code: \(code)")
                 }
+            case .networkError:
+                fallthrough
             case .parseError:
-                fatalError("Unhandled parse error")
+                fatalError("Unhandled error")
             }
         }
     }

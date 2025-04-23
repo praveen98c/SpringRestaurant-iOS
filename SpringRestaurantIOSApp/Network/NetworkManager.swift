@@ -8,8 +8,13 @@
 import Foundation
 
 struct NetworkErrorData: Error {
-    let error: Error
+    let error: NetworkError
     let data: Data?
+    
+    init(error: NetworkError, data: Data? = nil) {
+        self.error = error
+        self.data = data
+    }
 }
 
 protocol NetworkManagerProtocol {
@@ -23,12 +28,14 @@ protocol NetworkManagerProtocol {
 struct NetworkManager: NetworkManagerProtocol {
     
     func request(request: HTTPRequestProtocol) async -> Result<Data, NetworkErrorData> {
+        let urlRequest: URLRequest
         do {
-            return await self.request(request: try request.urlRequest())
-        }
-        catch {
+            urlRequest = try request.urlRequest()
+        } catch {
             return .failure(NetworkErrorData(error: error, data: nil))
         }
+        
+        return await self.request(request: urlRequest)
     }
     
     func request(url: URL) async -> Result<Data, NetworkErrorData> {
@@ -41,27 +48,40 @@ struct NetworkManager: NetworkManagerProtocol {
             let (data, response) = try await URLSession.shared.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                return .failure(NetworkErrorData(error: NetworkError.noResponse, data: nil))
+                throw NetworkErrorData(error: NetworkError.noResponse, data: nil)
             }
             
             let statusCode = httpResponse.statusCode
             if statusCode < 200 || statusCode >= 300 {
-                return .failure(NetworkErrorData(error: NetworkError.httpError(statusCode), data: data))
+                throw NetworkErrorData(error: NetworkError.httpError(statusCode), data: data)
             }
             
             return .success(data)
         } catch {
-            return .failure(NetworkErrorData(error: error, data: nil))
+            let networkError: NetworkError
+            var networkData: Data? = nil
+            switch error {
+            case let error as NetworkError:
+                networkError = error
+            case let error as URLError:
+                networkError = error.toNetworkError()
+            case let error as NetworkErrorData:
+                networkError = error.error
+                networkData = error.data
+            default:
+                networkError = .unknown(error)
+            }
+            return .failure(NetworkErrorData(error: networkError, data: networkData))
         }
     }
 }
 
 private extension HTTPRequestProtocol {
-    func urlRequest() throws -> URLRequest {
+    func urlRequest() throws(NetworkError) -> URLRequest {
         let path = endPoint.resolvedPath()
         guard let url = URL(string: baseURL + path),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            throw InvalidRequestError.invalidURL
+            throw NetworkError.invalidURL
         }
         
         if let queryItems = queryItems() {
@@ -69,7 +89,7 @@ private extension HTTPRequestProtocol {
         }
         
         guard let finalUrl = components.url else {
-            throw InvalidRequestError.invalidQueryComponents
+            throw NetworkError.invalidQueryComponents
         }
         
         var req = URLRequest(url: finalUrl)
@@ -118,14 +138,16 @@ enum HTTPMethod: String {
 }
 
 enum NetworkError: Error {
-    case invalidURL
     case noResponse
     case httpError(Int)
-}
-
-public enum InvalidRequestError: Error {
     case invalidURL
     case invalidQueryComponents
+    // URL Errors
+    case notConnectedToInternet
+    case timedOut
+    case badServerResponse
+    // General
+    case unknown(Error)
 }
 
 protocol HTTPEndPointProtocol {
@@ -171,5 +193,21 @@ extension HTTPRequestProtocol {
         }
         
         return headers
+    }
+}
+
+extension URLError {
+    
+    func toNetworkError() -> NetworkError {
+        switch self.code {
+        case .notConnectedToInternet:
+            return .notConnectedToInternet
+        case .timedOut:
+            return .timedOut
+        case .badServerResponse:
+            return .badServerResponse
+        default:
+            return .unknown(self)
+        }
     }
 }
