@@ -8,6 +8,6 @@
 import Foundation
 import SwiftUI
 
-class HomeViewModel: ObservableObject {
+class RestaurantScreenViewModel: ObservableObject {
     @Published var navigationPath = NavigationPath()
 }

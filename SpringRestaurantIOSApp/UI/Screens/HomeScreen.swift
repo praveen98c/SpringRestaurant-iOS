@@ -12,7 +12,6 @@ struct HomeScreen: View {
     
     var authManaging: AuthManagingProtocol
     let appContext: AppContext
-    @StateObject var viewModel = HomeViewModel()
     
     init(appContext: AppContext, authManaging: AuthManagingProtocol) {
         self.authManaging = authManaging
@@ -20,19 +19,15 @@ struct HomeScreen: View {
     }
     
     var body: some View {
-        NavigationStack(path: $viewModel.navigationPath) {
-            VStack(spacing: 0) {
-                FeaturedRestaurantsView(appContext: appContext, navigationPath: $viewModel.navigationPath)
-                RestaurantsView(appContext: appContext, navigationPath: $viewModel.navigationPath)
-                Button("Logout", action: {
-                    Task {
-                        authManaging.logout()
-                    }
-                })
-            }
-        }
-        .navigationDestination(for: RestaurantModel.self) { restaurant in
-            RestaurantDetailView(restaurant: restaurant)
+        TabView {
+            RestaurantsScreen(appContext: appContext)
+                .tabItem {
+                    Label("Restaurants", systemImage: "house")
+                }
+            SettingsScreen(authManaging: authManaging)
+                .tabItem {
+                    Label("Settings", systemImage: "magnifyingglass")
+                }
         }
     }
 }
