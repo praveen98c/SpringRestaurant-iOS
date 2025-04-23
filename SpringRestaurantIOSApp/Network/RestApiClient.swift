@@ -12,6 +12,7 @@ protocol RestApiProtocol {
     func register(username: String, password: String, name: String) async -> Result<Void, RestAPIError>
     func getRestaurantById(id: Int64) async -> Result<RestaurantDTO, RestAPIError>
     func getRestaurants(page: Int, size: Int) async -> Result<PageDTO<RestaurantDTO>, RestAPIError>
+    func getMenusByRestaurantId(id: Int64) async -> Result<[MenuDTO], RestAPIError>
 }
 
 enum RestEndPoint: String {
@@ -19,6 +20,7 @@ enum RestEndPoint: String {
     case register = "/api/auth/register"
     case restaurantById = "/api/restaurants/{id}"
     case restaurants = "/api/restaurants"
+    case menusByRestaurantId = "/api/menus/restaurant/{id}"
 }
 
 final class RestApiClient: RestApiProtocol {
@@ -63,6 +65,13 @@ final class RestApiClient: RestApiProtocol {
         guard let token = keyChainValues.authToken else { fatalError() }
         let restaurantRequest = RestaurantRequest(baseURL: baseUrl, headers: authHeader(token: token), queryParameters: ["page": [page], "size": [size]])
         let response = await networkManager.request(request: restaurantRequest)
+        return parseResult(response)
+    }
+    
+    func getMenusByRestaurantId(id: Int64) async -> Result<[MenuDTO], RestAPIError> {
+        guard let token = keyChainValues.authToken else { fatalError() }
+        let menuRequest = MenuRequest(baseURL: baseUrl, headers: authHeader(token: token), restaurantId: id)
+        let response = await networkManager.request(request: menuRequest)
         return parseResult(response)
     }
 }
