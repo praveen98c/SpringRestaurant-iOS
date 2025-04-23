@@ -12,12 +12,13 @@ struct FeaturedRestaurantCardView: View {
     
     let restaurant: RestaurantModel
     @ObservedObject var homeViewModel: RestaurantViewModel
+    @ObservedObject var imageViewModel: ImageViewModel
     private let mockRating: Double = 4.8
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ImageView(imageUrl: restaurant.imageUrl) { url in
-                return homeViewModel.loadedImages[url]
+                return imageViewModel.loadedImages[url]
             }
             .frame(width: 160, height: 100)
             .clipped()
@@ -31,10 +32,10 @@ struct FeaturedRestaurantCardView: View {
         .padding()
         .cornerRadius(12)
         .onAppear {
-            homeViewModel.downloadImage(urlString: restaurant.imageUrl)
+            imageViewModel.downloadImage(urlString: restaurant.imageUrl)
         }
         .onDisappear {
-            homeViewModel.cancelDownloadImage(urlString: restaurant.imageUrl)
+            imageViewModel.cancelDownloadImage(urlString: restaurant.imageUrl)
         }
     }
 }

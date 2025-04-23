@@ -20,11 +20,15 @@ struct RestaurantsScreen: View {
     var body: some View {
         NavigationStack(path: $viewModel.navigationPath) {
             VStack(spacing: 0) {
-                FeaturedRestaurantsView(appContext: appContext, navigationPath: $viewModel.navigationPath)
-                RestaurantsView(appContext: appContext, navigationPath: $viewModel.navigationPath)
+                FeaturedRestaurantsView(restaurantService: appContext.services.restaurantService,
+                                        imageService: appContext.services.imageService,
+                                        navigationPath: $viewModel.navigationPath)
+                RestaurantsView(restaurantService: appContext.services.restaurantService,
+                                imageService: appContext.services.imageService,
+                                navigationPath: $viewModel.navigationPath)
             }
             .navigationDestination(for: RestaurantModel.self) { restaurant in
-                RestaurantDetailView(restaurant: restaurant)
+                RestaurantDetailView(restaurant: restaurant, menuService: appContext.services.menuService)
             }
         }
     }

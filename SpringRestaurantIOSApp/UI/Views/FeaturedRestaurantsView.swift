@@ -11,10 +11,12 @@ import SwiftUI
 struct FeaturedRestaurantsView: View {
     
     @StateObject var restaurantViewModel: RestaurantViewModel
+    @StateObject var imageViewModel: ImageViewModel
     @Binding var navigationPath: NavigationPath
     
-    init(appContext: AppContext, navigationPath: Binding<NavigationPath>) {
-        _restaurantViewModel = StateObject(wrappedValue: RestaurantViewModel(restaurantService: FeaturedRestaurantRetrieving(restaurantService: appContext.services.restaurantService), imageService: appContext.services.imageService))
+    init(restaurantService: RestaurantServiceProtocol, imageService: ImageServiceProtocol, navigationPath: Binding<NavigationPath>) {
+        _restaurantViewModel = StateObject(wrappedValue: RestaurantViewModel(restaurantService: FeaturedRestaurantRetrieving(restaurantService: restaurantService)))
+        _imageViewModel = StateObject(wrappedValue: ImageViewModel(imageService: imageService))
         _navigationPath = navigationPath
     }
     
@@ -28,7 +30,7 @@ struct FeaturedRestaurantsView: View {
                         Button(action: {
                             navigationPath.append(restaurant)
                         }) {
-                            FeaturedRestaurantCardView(restaurant: restaurant, homeViewModel: restaurantViewModel)
+                            FeaturedRestaurantCardView(restaurant: restaurant, homeViewModel: restaurantViewModel, imageViewModel: imageViewModel)
                         }
                     }
                 }

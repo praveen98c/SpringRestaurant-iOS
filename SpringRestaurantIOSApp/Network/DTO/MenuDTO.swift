@@ -8,6 +8,7 @@
 import Foundation
 
 struct MenuDTO: Codable {
+    let id: Int64
     let name: String
     let description: String
 }

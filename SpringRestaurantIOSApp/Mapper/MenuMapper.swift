@@ -10,7 +10,7 @@ import Foundation
 extension MenuDTO {
     
     func toDomain() -> MenuModel {
-        return MenuModel(name: name, description: description)
+        return MenuModel(id: id, name: name, description: description)
     }
 }
 

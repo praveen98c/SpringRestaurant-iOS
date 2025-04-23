@@ -10,15 +10,18 @@ import Foundation
 protocol ServicesProtocol {
     var restaurantService: RestaurantServiceProtocol { get }
     var imageService: ImageServiceProtocol { get }
+    var menuService: MenuServiceProtocol { get }
 }
 
 struct Services: ServicesProtocol {
     
     let restaurantService: RestaurantServiceProtocol
     let imageService: ImageServiceProtocol
+    let menuService: MenuServiceProtocol
     
     init(restApiClient: RestApiProtocol, networkManager: NetworkManager) {
-        self.restaurantService = RestaurantService(restApiClient: restApiClient)
-        self.imageService = ImageService(networkManager: networkManager)
+        restaurantService = RestaurantService(restApiClient: restApiClient)
+        imageService = ImageService(networkManager: networkManager)
+        menuService = MenuService(restApiClient: restApiClient)
     }
 }

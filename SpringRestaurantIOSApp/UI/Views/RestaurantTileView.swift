@@ -11,6 +11,7 @@ import SwiftUI
 struct RestaurantTile: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var homeViewModel: RestaurantViewModel
+    @ObservedObject var imageViewModel: ImageViewModel
     
     private let restaurant: RestaurantModel
     
@@ -18,9 +19,10 @@ struct RestaurantTile: View {
         horizontalSizeClass == .regular
     }
     
-    init(restaurant: RestaurantModel, homeViewModel: RestaurantViewModel) {
+    init(restaurant: RestaurantModel, homeViewModel: RestaurantViewModel, imageViewModel: ImageViewModel) {
         self.restaurant = restaurant
         self.homeViewModel = homeViewModel
+        self.imageViewModel = imageViewModel
     }
     
     var body: some View {
@@ -31,7 +33,7 @@ struct RestaurantTile: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 ImageView(imageUrl: restaurant.imageUrl) { url in
-                    return homeViewModel.loadedImages[url]
+                    return imageViewModel.loadedImages[url]
                 }
                 .frame(height: 120)
                 .clipped()
@@ -53,10 +55,10 @@ struct RestaurantTile: View {
         }
         .padding(.horizontal)
         .onAppear {
-            homeViewModel.downloadImage(urlString: restaurant.imageUrl)
+            imageViewModel.downloadImage(urlString: restaurant.imageUrl)
         }
         .onDisappear {
-            homeViewModel.cancelDownloadImage(urlString: restaurant.imageUrl)
+            imageViewModel.cancelDownloadImage(urlString: restaurant.imageUrl)
         }
     }
 }
