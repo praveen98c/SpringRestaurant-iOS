@@ -1,5 +1,5 @@
 //
-//  FeaturedRestaurantView.swift
+//  HorizontalScrollItemCardView.swift
 //  SpringRestaurantIOSApp
 //
 //  Created by Praveen on 2025-04-20.
@@ -8,23 +8,22 @@
 import Foundation
 import SwiftUI
 
-struct FeaturedRestaurantCardView: View {
+struct HorizontalItemScrollerCardView<T: ItemProtocol>: View {
     
-    let restaurant: RestaurantModel
-    @ObservedObject var homeViewModel: RestaurantViewModel
+    let item : T
     @ObservedObject var imageViewModel: ImageViewModel
     private let mockRating: Double = 4.8
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            ImageView(imageUrl: restaurant.imageUrl) { url in
+            ImageView(imageUrl: item.imageUrl) { url in
                 return imageViewModel.loadedImages[url]
             }
             .frame(width: 160, height: 100)
             .clipped()
             .cornerRadius(10)
             
-            Text(restaurant.name)
+            Text(item.title)
                 .modifier(TitleModifier())
             
             RatingsView()
@@ -32,10 +31,10 @@ struct FeaturedRestaurantCardView: View {
         .padding()
         .cornerRadius(12)
         .onAppear {
-            imageViewModel.downloadImage(urlString: restaurant.imageUrl)
+            imageViewModel.downloadImage(urlString: item.imageUrl)
         }
         .onDisappear {
-            imageViewModel.cancelDownloadImage(urlString: restaurant.imageUrl)
+            imageViewModel.cancelDownloadImage(urlString: item.imageUrl)
         }
     }
 }

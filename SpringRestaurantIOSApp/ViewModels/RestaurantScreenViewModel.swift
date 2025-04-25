@@ -10,4 +10,8 @@ import SwiftUI
 
 class RestaurantScreenViewModel: ObservableObject {
     @Published var navigationPath = NavigationPath()
+    
+    func navigateTo(_ item: any ItemProtocol) {
+        navigationPath.append(item)
+    }
 }

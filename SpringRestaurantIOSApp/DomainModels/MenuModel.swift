@@ -11,6 +11,7 @@ struct MenuModel {
     let id: Int64
     let name: String
     let description: String
+    let imageUrl: String
 }
 
 extension MenuModel: Equatable, Identifiable, Hashable {}

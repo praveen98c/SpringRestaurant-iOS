@@ -11,6 +11,14 @@ import SwiftUI
 class RestaurantViewModel: ObservableObject {
     
     @Published private(set) var restaurants: [RestaurantModel] = []
+    
+    func bindingForRestaurants() -> Binding<[RestaurantModel]> {
+            Binding(
+                get: { self.restaurants },
+                set: { self.restaurants = $0 }
+            )
+    }
+    
     private var pageNumber = 0
     private var pageSize = 10
     private var ongoingTasks: [String: Task<(), Never>] = [:]
