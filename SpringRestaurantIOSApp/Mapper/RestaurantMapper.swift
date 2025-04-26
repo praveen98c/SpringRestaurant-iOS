@@ -14,6 +14,7 @@ extension RestaurantDTO {
             id: id,
             name: name,
             location: location,
+            rating: rating,
             imageUrl: imageUrl
         )
     }

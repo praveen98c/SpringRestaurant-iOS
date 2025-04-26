@@ -10,5 +10,6 @@ import Foundation
 protocol ItemProtocol: Hashable {
     var id: Int64 { get }
     var title: String { get }
+    var rating: Double { get }
     var imageUrl: String { get }
 }

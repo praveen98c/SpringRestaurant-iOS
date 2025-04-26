@@ -11,5 +11,6 @@ struct RestaurantDTO: Codable {
     let id: Int64
     let name: String
     let location: String
+    let rating: Double
     let imageUrl: String
 }

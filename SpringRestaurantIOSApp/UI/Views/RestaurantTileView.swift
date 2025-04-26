@@ -43,7 +43,7 @@ struct RestaurantTile: View {
                     Text(restaurant.name)
                         .modifier(TitleModifier())
                     
-                    RatingsView()
+                    RatingsView(rating: restaurant.rating)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }

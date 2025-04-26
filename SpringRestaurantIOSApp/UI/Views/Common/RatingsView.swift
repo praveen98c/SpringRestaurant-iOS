@@ -10,18 +10,18 @@ import SwiftUI
 
 public struct RatingsView: View {
     
-    private let mockRating: Double = 4.8
+    let rating: Double
     
     public var body: some View {
         HStack(spacing: 4) {
             ForEach(0..<5) { index in
-                Image(systemName: index < Int(mockRating) ? "star.fill" : (index < Int(ceil(mockRating)) ? "star.leadinghalf.filled" : "star"))
+                Image(systemName: index < Int(rating) ? "star.fill" : (index < Int(ceil(rating)) ? "star.leadinghalf.filled" : "star"))
                     .resizable()
                     .frame(width: 10, height: 10)
                     .foregroundColor(.yellow)
             }
             
-            Text(String(format: "%.1f", mockRating))
+            Text(String(format: "%.1f", rating))
                 .font(.caption)
                 .foregroundColor(.secondary)
         }

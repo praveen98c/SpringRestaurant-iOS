@@ -12,7 +12,6 @@ struct ItemCardView<T: ItemProtocol>: View {
     
     let item : T
     @ObservedObject var imageViewModel: ImageViewModel
-    private let mockRating: Double = 4.8
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -26,7 +25,7 @@ struct ItemCardView<T: ItemProtocol>: View {
             Text(item.title)
                 .modifier(TitleModifier())
             
-            RatingsView()
+            RatingsView(rating: item.rating)
         }
         .padding()
         .cornerRadius(12)
