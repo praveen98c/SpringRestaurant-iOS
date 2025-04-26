@@ -10,6 +10,7 @@ import Foundation
 class RestaurantDetailViewModel: ObservableObject {
     
     @Published var menus: [MenuModel] = []
+    @Published var selectedMenu: MenuModel?
     let menuService: MenuServiceProtocol
     
     init(menuService: MenuServiceProtocol) {

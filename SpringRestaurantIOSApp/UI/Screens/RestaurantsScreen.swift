@@ -34,7 +34,10 @@ struct RestaurantsScreen: View {
                                 navigationPath: $viewModel.navigationPath)
             }
             .navigationDestination(for: RestaurantModel.self) { restaurant in
-                RestaurantDetailView(restaurant: restaurant, menuService: appContext.services.menuService, imageService: appContext.services.imageService)
+                RestaurantDetailView(restaurant: restaurant,
+                                     menuService: appContext.services.menuService,
+                                     foodItemService: appContext.services.foodItemService,
+                                     imageService: appContext.services.imageService)
             }
         }
     }

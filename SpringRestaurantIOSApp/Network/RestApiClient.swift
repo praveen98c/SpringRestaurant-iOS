@@ -13,6 +13,7 @@ protocol RestApiProtocol {
     func getRestaurantById(id: Int64) async -> Result<RestaurantDTO, RestAPIError>
     func getRestaurants(page: Int, size: Int) async -> Result<PageDTO<RestaurantDTO>, RestAPIError>
     func getMenusByRestaurantId(id: Int64) async -> Result<[MenuDTO], RestAPIError>
+    func getFoodItemsByMenuId(id: Int64) async -> Result<[FoodItemDTO], RestAPIError>
 }
 
 enum RestEndPoint: String {
@@ -21,6 +22,7 @@ enum RestEndPoint: String {
     case restaurantById = "/api/restaurants/{id}"
     case restaurants = "/api/restaurants"
     case menusByRestaurantId = "/api/menus/restaurant/{id}"
+    case foodItemsByRestaurantId = "/api/fooditems/menu/{id}"
 }
 
 final class RestApiClient: RestApiProtocol {
@@ -71,6 +73,13 @@ final class RestApiClient: RestApiProtocol {
     func getMenusByRestaurantId(id: Int64) async -> Result<[MenuDTO], RestAPIError> {
         guard let token = keyChainValues.authToken else { fatalError() }
         let menuRequest = MenuRequest(baseURL: baseUrl, headers: authHeader(token: token), restaurantId: id)
+        let response = await networkManager.request(request: menuRequest)
+        return parseResult(response)
+    }
+    
+    func getFoodItemsByMenuId(id: Int64) async -> Result<[FoodItemDTO], RestAPIError> {
+        guard let token = keyChainValues.authToken else { fatalError() }
+        let menuRequest = FoodItemRequest(baseURL: baseUrl, headers: authHeader(token: token), menuId: id)
         let response = await networkManager.request(request: menuRequest)
         return parseResult(response)
     }

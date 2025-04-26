@@ -12,12 +12,16 @@ struct RestaurantDetailView: View {
     
     let restaurant: RestaurantModel
     private let imageService: ImageServiceProtocol
+    private let foodItemService: FoodItemServiceProtocol
     @StateObject var restaurantDetailViewModel: RestaurantDetailViewModel
-    @State private var navigationPath = NavigationPath()
     
-    init(restaurant: RestaurantModel, menuService: MenuServiceProtocol, imageService: ImageServiceProtocol) {
+    init(restaurant: RestaurantModel,
+         menuService: MenuServiceProtocol,
+         foodItemService: FoodItemServiceProtocol,
+         imageService: ImageServiceProtocol) {
         self.restaurant = restaurant
         self.imageService = imageService
+        self.foodItemService = foodItemService
         _restaurantDetailViewModel = StateObject(wrappedValue: RestaurantDetailViewModel(menuService: menuService))
     }
     
@@ -26,7 +30,14 @@ struct RestaurantDetailView: View {
             HorizontalItemScroller(
                 title: "Menu Items",
                 items: $restaurantDetailViewModel.menus,
-                imageService: imageService) { item in }
+                imageService: imageService) { item in
+                    restaurantDetailViewModel.selectedMenu = item
+                }
+            if let menu = restaurantDetailViewModel.selectedMenu {
+                FoodItemsView(foodItemService: foodItemService, imageService: imageService, menu: menu)
+            } else {
+                Spacer()
+            }
         }
         .padding(.vertical)
         .onAppear {

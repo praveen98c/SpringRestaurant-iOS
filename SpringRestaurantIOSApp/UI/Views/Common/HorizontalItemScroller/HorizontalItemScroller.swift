@@ -32,7 +32,7 @@ struct HorizontalItemScroller<T: ItemProtocol>: View {
                         Button(action: {
                             onTap(item)
                         }) {
-                            HorizontalItemScrollerCardView(item: item, imageViewModel: imageViewModel)
+                            ItemCardView(item: item, imageViewModel: imageViewModel)
                         }
                     }
                 }

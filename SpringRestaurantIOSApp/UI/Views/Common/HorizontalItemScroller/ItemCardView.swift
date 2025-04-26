@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct HorizontalItemScrollerCardView<T: ItemProtocol>: View {
+struct ItemCardView<T: ItemProtocol>: View {
     
     let item : T
     @ObservedObject var imageViewModel: ImageViewModel
