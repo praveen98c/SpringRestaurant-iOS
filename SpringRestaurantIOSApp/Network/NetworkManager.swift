@@ -153,12 +153,16 @@ enum NetworkError: Error {
 protocol HTTPEndPointProtocol {
     var restEndPoint: String { get }
     var pathParameters: [String: String]? { get }
-    func resolvedPath() -> String
 }
 
 struct HTTPEndPoint: HTTPEndPointProtocol {
     let restEndPoint: String
     let pathParameters: [String : String]?
+    
+    init(restEndPoint: String, pathParameters: [String : String]? = nil) {
+        self.restEndPoint = restEndPoint
+        self.pathParameters = pathParameters
+    }
 }
 
 extension HTTPEndPointProtocol {

@@ -9,7 +9,7 @@ import Foundation
 
 struct LoginRequest: HTTPRequestProtocol {
     let baseURL: String
-    let endPoint: HTTPEndPointProtocol = LoginEndPoint()
+    let endPoint: HTTPEndPointProtocol = HTTPEndPoint(restEndPoint: RestEndPoint.login.rawValue)
     let method: HTTPMethod = .POST
     let headers: [String: String]? = nil
     let queryParameters: [String : [Any]]? = nil
@@ -19,9 +19,4 @@ struct LoginRequest: HTTPRequestProtocol {
         self.baseURL = baseURL
         bodyType = .json(["username": username, "password": password])
     }
-}
-
-struct LoginEndPoint: HTTPEndPointProtocol {
-    let restEndPoint: String = RestEndPoint.login.rawValue
-    let pathParameters: [String : String]? = nil
 }

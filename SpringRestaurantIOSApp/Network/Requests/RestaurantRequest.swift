@@ -22,7 +22,7 @@ struct RestaurantRequest: HTTPRequestProtocol {
         endPoint = HTTPEndPoint(restEndPoint: RestEndPoint.restaurantById.rawValue, pathParameters: ["id": String(restaurantId)])
     }
     
-    init(baseURL: String, headers: [String: String], queryParameters: [String : [Any]]?) {
+    init(baseURL: String, headers: [String: String], queryParameters: [String : [Any]]) {
         self.baseURL = baseURL
         self.headers = headers
         self.queryParameters = queryParameters
